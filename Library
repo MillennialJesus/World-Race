@@ -1,1 +1,84 @@
-Library
+// library.js — Hot Wheels: World Race → Acceleracers Canon Data
+(function () {
+  const VERSION = "HWLib 1.0 — World Race to Acceleracers";
+
+  // === CHARACTERS ===
+  const CHARACTERS = [
+    // World Race & Acceleracers Core
+    { name: "Vert Wheeler", team: "Wave Rippers / Teku", role: "Protagonist", car: "Deora II", traits: ["Leader", "Determined", "Reckless"] },
+    { name: "Taro Kitano", team: "Street Breed / Metal Maniacs", role: "Ace Racer", car: "Synkro", traits: ["Prideful", "Competitive"] },
+    { name: "Kurt Wylde", team: "Street Breed / Metal Maniacs", role: "Anti-Hero", car: "Switchback", traits: ["Reckless", "Brash", "Loyal"] },
+    { name: "Mark Wylde", team: "Road Beasts / Teku", role: "Wildcard", car: "Baseline", traits: ["Temperamental", "Defiant"] },
+    { name: "Brian Kadeem", team: "Dune Ratz / Teku", role: "Wise Veteran", car: "Desert Heat", traits: ["Calm", "Strategic"] },
+    { name: "Nolo Passaro", team: "Teku", role: "Young Leader", car: "Synkro", traits: ["Determined", "Focused"] },
+    { name: "Karma Eiss", team: "Teku", role: "Cool Strategist", car: "Power Rage", traits: ["Calm", "Analytical"] },
+    { name: "Shirako Takamoto", team: "Teku", role: "DJ / Racer", car: "Bassline", traits: ["Relaxed", "Sharp Reflexes"] },
+    { name: "Monkey Khan", team: "Teku", role: "Tech Specialist", car: "Reverb", traits: ["Playful", "Inventive"] },
+    { name: "Tork Maddox", team: "Metal Maniacs", role: "Leader", car: "Rivited", traits: ["Loud", "Strong"] },
+    { name: "Porkchop", team: "Metal Maniacs", role: "Muscle", car: "Rolling Thunder", traits: ["Funny", "Tough"] },
+    { name: "Mitch 'Monkey' McClurg", team: "Metal Maniacs", role: "Wildcard", car: "Hollowback", traits: ["Daredevil", "Jokester"] },
+    { name: "Gelorum", team: "Racing Drones", role: "Main Antagonist", car: "Drone Car", traits: ["Cold", "Relentless"] },
+    { name: "Dr. Peter Tezla", team: "Tezla Labs", role: "Scientist", car: null, traits: ["Genius", "Cryptic"] },
+    { name: "Gig", team: "Tezla Labs", role: "AI Assistant", car: null, traits: ["Helpful", "Data-Oriented"] }
+  ];
+
+  // === TEAMS ===
+  const TEAMS = [
+    { name: "Wave Rippers", style: "Surf & Water", focus: "Style over aggression" },
+    { name: "Street Breed", style: "Street racing", focus: "Pure speed" },
+    { name: "Dune Ratz", style: "Off-road endurance", focus: "Adaptability" },
+    { name: "Road Beasts", style: "Aggressive survival", focus: "Force" },
+    { name: "Teku", style: "Urban, tech-heavy", focus: "Precision" },
+    { name: "Metal Maniacs", style: "Heavy metal & brute force", focus: "Destruction" },
+    { name: "Racing Drones", style: "AI perfection", focus: "Efficiency" }
+  ];
+
+  // === CARS ===
+  const CARS = [
+    { name: "Deora II", driver: "Vert Wheeler", speed: 9, handling: 8, durability: 6 },
+    { name: "Synkro", driver: "Taro Kitano / Nolo Passaro", speed: 8, handling: 9, durability: 6 },
+    { name: "Switchback", driver: "Kurt Wylde", speed: 9, handling: 7, durability: 7 },
+    { name: "Baseline", driver: "Mark Wylde", speed: 8, handling: 8, durability: 7 },
+    { name: "Desert Heat", driver: "Brian Kadeem", speed: 7, handling: 9, durability: 8 },
+    { name: "Power Rage", driver: "Karma Eiss", speed: 8, handling: 9, durability: 6 },
+    { name: "Bassline", driver: "Shirako Takamoto", speed: 8, handling: 8, durability: 7 },
+    { name: "Reverb", driver: "Monkey Khan", speed: 7, handling: 8, durability: 7 },
+    { name: "Rivited", driver: "Tork Maddox", speed: 7, handling: 6, durability: 9 },
+    { name: "Rolling Thunder", driver: "Porkchop", speed: 6, handling: 6, durability: 10 },
+    { name: "Hollowback", driver: "Mitch 'Monkey' McClurg", speed: 8, handling: 7, durability: 8 },
+    { name: "Drone Car", driver: "Gelorum", speed: 10, handling: 9, durability: 9 }
+  ];
+
+  // === HAZARDS ===
+  const HAZARDS = [
+    // On-track
+    { type: "Oil Slick", effect: "Reduce handling", danger: 5 },
+    { type: "Falling Rock", effect: "Block track", danger: 6 },
+    { type: "Lava Burst", effect: "Instant KO if hit", danger: 9 },
+    { type: "Loop Gap", effect: "Requires speed boost", danger: 7 },
+    { type: "Drone Ambush", effect: "Damage durability", danger: 8 },
+
+    // Realm Specific
+    { type: "Lava Realm Heat Wave", effect: "Reduce performance", danger: 7 },
+    { type: "Water Realm Whirlpool", effect: "Pull car off track", danger: 8 },
+    { type: "Storm Realm Lightning", effect: "Disable electronics", danger: 6 },
+    { type: "Ice Realm Slick", effect: "Extreme loss of traction", danger: 8 },
+    { type: "Metro Realm Traffic", effect: "Block path", danger: 5 }
+  ];
+
+  // === ARTIFACTS & DEVICES ===
+  const ARTIFACTS = [
+    { name: "Wheel of Power", purpose: "Opens Acceleron realms" },
+    { name: "Wheel of Infinity", purpose: "Acceleron technology beyond comprehension" },
+    { name: "Speed Cube", purpose: "Unlocks the Racing Realms" },
+    { name: "Drone Tech", purpose: "Enemy upgrades for pursuit" }
+  ];
+
+  // Export
+  if (typeof window !== 'undefined') {
+    window.HWLib = { VERSION, CHARACTERS, TEAMS, CARS, HAZARDS, ARTIFACTS };
+  } else if (typeof global !== 'undefined') {
+    global.HWLib = { VERSION, CHARACTERS, TEAMS, CARS, HAZARDS, ARTIFACTS };
+  }
+})();
+
