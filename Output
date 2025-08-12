@@ -1,0 +1,33 @@
+// output.js — Updated nitro commentary for HW: WR / Acceleracers atmosphere
+
+const modifier = (text) => {
+  if (typeof state !== 'object' || state === null) return { text };
+  if (!state.vars) state.vars = {};
+
+  const playerName = state.vars.playerName || "Driver";
+  const carName = state.vars.carName || "Your car";
+  const teamName = state.vars.teamName || "Your team";
+
+  // Replace placeholders with player info
+  text = text.replace(/\[playerName\]/gi, playerName);
+  text = text.replace(/\[carName\]/gi, carName);
+  text = text.replace(/\[teamName\]/gi, teamName);
+
+  // Add nitro/boost dynamic commentary without crowds
+  if (/\b(nitro|boost|speed burst)\b/i.test(text)) {
+    const nitroComments = [
+      "The engine howls as Nitrox surges through the chassis.",
+      "Electric pulses race along the frame, pushing you beyond limits.",
+      "You feel the surge of power as Nitrox ignites the boost system.",
+      "The car’s sensors flare, channeling raw energy into speed.",
+      "Nitrox kicks in with a crackle of blue electricity under the hood."
+    ];
+    const randomComment = nitroComments[Math.floor(Math.random() * nitroComments.length)];
+    text += `\n\n${randomComment}`;
+  }
+
+  return { text };
+};
+
+// Don't modify this part
+modifier(text)
