@@ -1,0 +1,50 @@
+// input.js — Pull in pre-filled player variables, track racing actions
+
+const modifier = (text) => {
+  if (typeof state !== 'object' || state === null) return { text };
+
+  if (!state.vars) state.vars = {};
+
+  // Just grab the variables AI Dungeon filled for you via ${} placeholders:
+  const playerName = state.vars.playerName || "Driver";
+  const playerAge = state.vars.playerAge || "Unknown age";
+  const playerGender = state.vars.playerGender || "Unknown gender";
+  const playerAppearance = state.vars.playerAppearance || "Undefined appearance";
+  const carName = state.vars.carName || "Your car";
+  const carDescription = state.vars.carDescription || "An indescribable vehicle";
+  const teamName = state.vars.teamName || "Your team";
+
+  // You can optionally save these to a dedicated spot if you want:
+  state.player = {
+    name: playerName,
+    age: playerAge,
+    gender: playerGender,
+    appearance: playerAppearance
+  };
+
+  state.car = {
+    name: carName,
+    description: carDescription,
+    team: teamName
+  };
+
+  // Track racing actions (like before)
+  if (!state.actions) state.actions = [];
+  const actionKeywords = [
+    /\b(drift|powerslide|burnout|rev engine|hit nitro|launch boost)\b/i,
+    /\b(overtake|draft|block rival|swerve|corner hard)\b/i,
+    /\b(enter portal|cross finish|touch wheel of power)\b/i
+  ];
+
+  for (const regex of actionKeywords) {
+    if (regex.test(text)) {
+      state.actions.push({ turn: state.turn || 0, action: regex.source });
+    }
+  }
+
+  // Turn counter
+  state.turn = (state.turn || 0) + 1;
+
+  return { text };
+};
+modifier(text)
