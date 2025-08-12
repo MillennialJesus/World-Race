@@ -1,0 +1,34 @@
+// context.js — Inject player & car variables into context for natural AI recall
+
+const modifier = (text) => {
+  if (typeof state !== 'object' || state === null) return { text };
+
+  if (!state.vars) state.vars = {};
+
+  // Grab player and car info from vars with fallback defaults
+  const playerName = state.vars.playerName || "Driver";
+  const playerAge = state.vars.playerAge || "Unknown age";
+  const playerGender = state.vars.playerGender || "Unknown gender";
+  const playerAppearance = state.vars.playerAppearance || "Undefined appearance";
+  const carName = state.vars.carName || "Your car";
+  const carDescription = state.vars.carDescription || "An indescribable vehicle";
+  const teamName = state.vars.teamName || "Your team";
+
+  // Compose a context snippet that AI Dungeon appends to prompt for better memory
+  const injectedContext = `
+You are ${playerName}, a ${playerAge}-year-old ${playerGender} driver with ${playerAppearance}.  
+You drive "${carName}", ${carDescription}.  
+You are a proud member of the racing team "${teamName}".  
+Your main rival is Kurt Wylde, and you race to win the World Race across dimensions.  
+Remember your history, your car’s features, and your team dynamics as the story progresses.
+  `.trim();
+
+  // Add the injected context to the beginning of the existing context text
+  // so the AI always “knows” who the player is and the setting details.
+  const newText = `${injectedContext}\n\n${text}`;
+
+  return { text: newText };
+};
+
+// Don't modify this part
+modifier(text)
